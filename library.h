@@ -10,7 +10,7 @@ class library {
     std::string Format;
     int MovieRuntime;
     float Price;
-    int Year; //don't know if to make the type an int or short, just going with int for now.
+    int Year; 
   };
   std::list<movie> moviesList;
   

@@ -19,41 +19,40 @@ void library::read_from_file(const string file_name) {
   ifstream inFile;
   inFile.open(file_name);
   if(!inFile) {
-    cout << "There was an error opening the file, try again" << endl;
+    cout << "This file does not exist, try again" << endl;
   }
-  string Title;
-  string DirectorName;
-  int Runtime;
-  string Format;
-  float Price;
-  int Year;
-  getline(inFile, Title);
-  while(inFile) {
-    getline(inFile, DirectorName);
-    inFile >> Runtime;
-    inFile >> Format;
-    inFile >> Price;
-    inFile >> Year;
-    insert_sorted(Title, DirectorName, Runtime, Format, Price, Year);
-    getline(inFile, Title);
+  string title;
+  string directorName;
+  int runtime;
+  string format;
+  float price;
+  int year;
+  while(getline(inFile,title)) {
+    getline(inFile, directorName);
+    inFile >> runtime;
+    inFile >> format;
+    inFile >> price;
+    inFile >> year;
+    inFile.ignore(1, '\n');
+    insert_sorted(title, directorName, runtime, format, price, year);
   }
   inFile.close();
 }
 
 void library::insert_sorted(const string title, const string directorName, const int runtime, const string format, const float price, const int year) {
   movie insert;
-  list<movie>::iterator it = moviesList.begin();
   insert.Title = title;
   insert.DirectorName = directorName;
   insert.MovieRuntime = runtime;
   insert.Format = format;
   insert.Price = price;
   insert.Year = year;
-  if(moviesList.begin() -> Title > insert.Title) { //checking the title will come first alphabetically 
+  list<movie>::iterator it = moviesList.begin();
+  if(it == moviesList.end() || it  -> Title > insert.Title) { //checking the title will come first alphabetically 
     push_front(insert);
   }
   else {
-    while(it -> Title < insert.Title) { //goes thru the list to find the correct position to insert the movie title alphabetically
+    while(it != moviesList.end() && it  -> Title < insert.Title) { //goes thru the list to find the correct position to insert the movie title alphabetically
       it++;
     }
     moviesList.insert(it, insert);
@@ -70,11 +69,16 @@ void library::push_back(movie b) {
 
 void library::director_search(const string directorName) {
   list<movie>::iterator it;
-
+  int count = 0;
   for(it = moviesList.begin(); it != moviesList.end(); it++) {
-    if(it -> DirectorName == directorName) {
-      cout << it -> Title << it -> DirectorName << it -> MovieRuntime;
-    }
+      size_t found = it -> DirectorName.find(directorName);
+      if(found != string::npos) {
+        cout << it -> DirectorName << endl;
+        count++;
+      }
+      if(count == 0) {
+        cout << "No movies found with that substring" << endl;
+      }
   }
 }
 
@@ -109,7 +113,7 @@ void library::write_from_file(const string file_name) {
 
   list<movie>::iterator it;
   for(it = moviesList.begin(); it != moviesList.end(); it++) {
-    outFile << it -> Title << endl  << it -> DirectorName << endl;
+    outFile << it -> Title << endl << it -> DirectorName << endl << it -> Format << endl << it -> MovieRuntime << endl << it -> Price << endl << it -> Year << endl; 
   }
   outFile.close();
 }
@@ -117,6 +121,6 @@ void library::write_from_file(const string file_name) {
 void library::print(){
   list<movie>::iterator it;
   for(it = moviesList.begin(); it != moviesList.end(); it++) {
-    cout << it -> Title << endl << it -> DirectorName << endl;
+    cout << it -> Title << endl << it -> DirectorName << endl << it -> Format << endl << it -> MovieRuntime << endl << it -> Price << endl << it -> Year << endl;
   }
 }
