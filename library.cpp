@@ -20,7 +20,7 @@ void library::read_from_file(const string file_name) {
   inFile.open(file_name);
   if(!inFile) {
     cout << "This file does not exist, try again" << endl;
-  }
+  };
   string title;
   string directorName;
   int runtime;
@@ -69,41 +69,53 @@ void library::push_back(movie b) {
 
 void library::director_search(const string directorName) {
   list<movie>::iterator it;
-  int count = 0;
+  bool found = false;
   for(it = moviesList.begin(); it != moviesList.end(); it++) {
-      size_t found = it -> DirectorName.find(directorName);
-      if(found != string::npos) {
-        cout << it -> DirectorName << endl;
-        count++;
-      }
-      if(count == 0) {
-        cout << "No movies found with that substring" << endl;
-      }
+    if(it -> DirectorName == directorName) {
+      cout << "Title: " << it -> Title << endl;
+      cout << "Director: " << it -> DirectorName << endl;
+      cout << "Format: " << it -> Format << endl;
+      cout << "Runtime: " << it -> MovieRuntime << endl;
+      cout << "Price: " << it -> Price << endl;
+      cout << "Year: " << it -> Year << endl;
+      cout << endl;
+      found = true;
+    }
+  }
+  if(!found) {
+    cout << "No director found by that name, try again" << endl;
   }
 }
 
 void library::find_movie(const string title) {
   list<movie>::iterator it;
-  int count = 0;
+  bool foundit = false;
   for(it = moviesList.begin(); it != moviesList.end(); it++) {
       size_t found = it -> Title.find(title);
       if(found != string::npos) {
 	cout << it -> Title << endl;
-	count++;
+	foundit = true;
       }
-      if(count == 0) {
-	cout << "No movies found with that substring" << endl;
-      }
+  }
+  if(!foundit) {
+    cout << "No movies found with that substring, try again" << endl;
   }
 }
   
-void library::remove(const string title) {
+void library::removed(string title) {
   list<movie>::iterator it;
+  bool found = false;
   for(it = moviesList.begin(); it != moviesList.end(); it++) {
-    if(it -> Title == title) {
-      moviesList.erase(it);
+    if (it->Title == title) {
+      it = moviesList.erase(it);
+      cout << "Movie has been successfully deleted" << endl;
+      found = true;
     }
   }
+  if (!found) {
+      cout << "No movie found with that name, try again" << endl;
+  }
+  
 }
 
 void library::write_from_file(const string file_name) {

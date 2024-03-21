@@ -4,3 +4,27 @@ Quentin Tarantino
 Digital
 20.99
 1994
+GoodFellas
+Martin Scorsese
+146
+DVD
+19.99
+1990
+Casino
+Martin Scorsese
+178
+Blu-ray
+18.99
+1995
+Training Day
+Antoine Fuqua
+122
+VHS
+17.99
+2001
+The Gray Man
+Anthony Russo
+122
+Digital
+16
+2022

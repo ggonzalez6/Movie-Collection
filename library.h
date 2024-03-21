@@ -26,6 +26,6 @@ class library {
   
   void find_movie(const std::string title);
   void director_search(const std::string directorName);
-  void remove(std::string Title);
+  void removed(std::string Title);
 };
 #endif //LIBRARY_H

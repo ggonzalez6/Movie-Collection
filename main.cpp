@@ -5,10 +5,16 @@ using namespace std;
 
 int main() {
   library a;
+  
   string option;
   string fileName;
   string title;
   string directorName;
+  int runtime;
+  string format;
+  float price;
+  int year;
+  
   cout << "Welcome to the UTM Movie Collection! You may select one of the following options: " << endl;
   cout << "1 Read the Movie Collection from a file" << endl;
   cout << "2 Write the Movie Collection to a file" << endl;
@@ -48,15 +54,63 @@ int main() {
     else if (option == "4") {
       cout << "What is the full or partial name of the movie: ";
       cin >> title;
+      cout << endl;
+      
       a.find_movie(title);
 
       cout << endl;
       cout << "Please enter your next choice now: ";
     }
     else if (option == "5") {
+      cin.get();
       cout << "What is the name of the director: ";
-      cin >> directorName;
+      getline(cin, directorName);
+
+      cout << endl;
+      
       a.director_search(directorName);
+
+      cout << "Please enter your next choice now: ";
+    }
+    else if (option == "6") {
+      cin.get();
+      cout << "What is the title of the movie: ";
+      getline(cin,title);
+      cout << endl;
+
+      cout << "What is the director's name: ";
+      getline(cin,directorName);
+      cout << endl;
+
+      cout << "What is the runtime of the movie: ";
+      cin >> runtime;
+      cout << endl;
+
+      cout << "What is the format of the movie: ";
+      cin >> format;
+      cout << endl;
+
+      cout << "What is the price of the movie: ";
+      cin >> price;
+      cout << endl;
+
+      cout << "What year was the movie released in: ";
+      cin >> year;
+      cout << endl;
+
+      a.insert_sorted(title, directorName, runtime, format, price, year); 
+
+      cout << endl;
+      cout << "Please enter you next choice now: ";
+    }
+    else if (option == "7") {
+      cin.get();
+      cout << "What is the title of the movie you want to delete: ";
+      getline(cin, title);
+      
+      cout << endl;
+
+      a.removed(title);
 
       cout << endl;
       cout << "Please enter your next choice now: ";
