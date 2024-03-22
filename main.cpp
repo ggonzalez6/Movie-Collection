@@ -1,3 +1,11 @@
+/**
+ * @file main.cpp
+ * @author Gerardo Gonzalez & Daniel Way
+ * @date 2024-03-22
+ * @brief Where the menu gets displayed and the functions get called
+ * 
+ * 
+ */
 #include "library.h"
 #include <iostream>
 

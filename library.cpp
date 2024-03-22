@@ -1,3 +1,12 @@
+/**
+ * @file library.cpp
+ * @author Daniel Way
+ * @date 2024-03-22
+ * @brief Implementation of the library class
+ * 
+ * 
+ */
+
 #include "library.h"
 #include <iostream>
 #include <fstream>
@@ -10,6 +19,7 @@ using namespace std;
 library::library() {
 
 }
+
 library::~library() {
   moviesList.clear();
   cout << "deallocated list" << endl;
